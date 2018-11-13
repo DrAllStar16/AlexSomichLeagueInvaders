@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,10 +15,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	Font titleFont;
 
 	GamePanel() {
 		t = new Timer(1000 / 60, this);
-
+		titleFont = new Font("HanziPen SC", Font.ITALIC, 48);
 	}
 
 	@Override

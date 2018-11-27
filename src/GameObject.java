@@ -3,24 +3,22 @@ import java.awt.Graphics;
 public class GameObject {
 	int x;
 	int y;
-	int width;
-	int height;
+	int w;
+	int h;
 
-	public GameObject() {
-		x = 0;
-		y = 0;
-		width = 0;
-		height = 0;
+	public GameObject(int x, int y, int w, int h) {
+		this.x = 270;
+		this.y = 700;
+		this.w = 50;
+		this.h = 50;
 
 	}
 
 	public void update() {
-		x++;
-		y++;
+
 	}
 
-	public void draw(Graphics h) {
-		h.fillRect(x, y, 100, 100);
+	public void draw(Graphics d) {
 
 	}
 }

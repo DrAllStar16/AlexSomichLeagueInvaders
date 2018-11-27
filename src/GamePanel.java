@@ -16,10 +16,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	Font titleFont;
+	Font GameOverFont;
+	RocketShip RS;
 
-	GamePanel() {
+	public GamePanel() {
 		t = new Timer(1000 / 60, this);
 		titleFont = new Font("HanziPen SC", Font.ITALIC, 48);
+		GameOverFont = new Font("Futura", Font.BOLD, 48);
+		RS = new RocketShip(250, 700, 50, 50);
 	}
 
 	@Override
@@ -46,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-
+		RS.update();
 	}
 
 	public void updateEndState() {
@@ -56,16 +60,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawMenuState(Graphics a) {
 		a.setColor(Color.BLUE);
 		a.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
+		a.setFont(titleFont);
+		a.setColor(Color.WHITE);
+		a.drawString("League Invaders", 100, 40);
+
 	}
 
 	public void drawGameState(Graphics b) {
 		b.setColor(Color.black);
 		b.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
+		RS.draw(b);
 	}
 
 	public void drawEndState(Graphics c) {
 		c.setColor(Color.red);
 		c.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
+		c.setFont(GameOverFont);
+		c.setColor(Color.WHITE);
+		c.drawString("Game Over", 100, 40);
 	}
 
 	void startGame() {
@@ -103,6 +115,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}
+		}
+
+		if (KeyEvent.VK_UP == e.getKeyCode()) {
+			RS.y -= 20;
+		} else if (KeyEvent.VK_DOWN == e.getKeyCode()) {
+			RS.y += 20;
+		}
+		if (KeyEvent.VK_LEFT == e.getKeyCode()) {
+			RS.x -= 20;
+		}
+		if (KeyEvent.VK_RIGHT == e.getKeyCode()) {
+			RS.x += 20;
 		}
 
 	}

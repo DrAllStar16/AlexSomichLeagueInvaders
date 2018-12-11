@@ -18,12 +18,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font GameOverFont;
 	RocketShip RS;
+	ObjectManager OM;
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
-		titleFont = new Font("HanziPen SC", Font.ITALIC, 48);
-		GameOverFont = new Font("Futura", Font.BOLD, 48);
+		titleFont = new Font("HanziPen SC", Font.ITALIC, 36);
+		GameOverFont = new Font("Futura", Font.BOLD, 36);
 		RS = new RocketShip(250, 700, 50, 50);
+		OM = new ObjectManager(RS);
 	}
 
 	@Override
@@ -50,7 +52,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-		RS.update();
+		OM.update();
 	}
 
 	public void updateEndState() {
@@ -62,14 +64,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		a.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
 		a.setFont(titleFont);
 		a.setColor(Color.WHITE);
-		a.drawString("League Invaders", 100, 40);
-
+		a.drawString("League Invaders", 130, 40);
+		a.drawString("Press ENTER to start", 90, 400);
+		a.drawString("Press SPACE for intructions", 50, 700);
 	}
 
 	public void drawGameState(Graphics b) {
 		b.setColor(Color.black);
 		b.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
-		RS.draw(b);
+		OM.draw(b);
 	}
 
 	public void drawEndState(Graphics c) {
@@ -77,7 +80,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		c.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
 		c.setFont(GameOverFont);
 		c.setColor(Color.WHITE);
-		c.drawString("Game Over", 100, 40);
+		c.drawString("Game Over", 140, 40);
+		c.drawString("You killed 0 enemies", 50, 400);
+		c.drawString("Press ENTER to restart", 40, 700);
 	}
 
 	void startGame() {

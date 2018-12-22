@@ -53,6 +53,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 		OM.update();
+		OM.manageEnemies();
 	}
 
 	public void updateEndState() {
@@ -132,6 +133,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (KeyEvent.VK_RIGHT == e.getKeyCode()) {
 			RS.x += 20;
+		}
+		if (KeyEvent.VK_SPACE == e.getKeyCode()) {
+			OM.addProjectile(new Projectile(RS.x + 20, RS.y, 10, 10));
+
 		}
 
 	}

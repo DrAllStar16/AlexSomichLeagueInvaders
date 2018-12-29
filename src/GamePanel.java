@@ -11,10 +11,10 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer t;
-	final int MENU_STATE = 0;
-	final int GAME_STATE = 1;
-	final int END_STATE = 2;
-	int currentState = MENU_STATE;
+	final static int MENU_STATE = 0;
+	final static int GAME_STATE = 1;
+	final static int END_STATE = 2;
+	public static int currentState = MENU_STATE;
 	Font titleFont;
 	Font GameOverFont;
 	RocketShip RS;
@@ -54,6 +54,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateGameState() {
 		OM.update();
 		OM.manageEnemies();
+		OM.checkCollision();
+		OM.purgeObjects();
+		if (RS.isAlive = false) {
+			currentState = END_STATE;
+		}
 	}
 
 	public void updateEndState() {
@@ -118,6 +123,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (KeyEvent.VK_ENTER == e.getKeyCode()) {
 			currentState++;
+			RS.isAlive = true;
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}

@@ -10,12 +10,20 @@ public class RocketShip extends GameObject {
 	}
 
 	public void update() {
-
+		super.update();
 	}
 
 	public void draw(Graphics d) {
 		d.setColor(Color.BLUE);
 
 		d.fillRect(x, y, w, h);
+	}
+	
+	public void resetRocket() {
+		x = 250;
+		y = 700;
+		w = 50;
+		h = 50;
+		isAlive = true;
 	}
 }

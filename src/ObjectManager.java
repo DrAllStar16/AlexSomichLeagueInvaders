@@ -10,8 +10,13 @@ public class ObjectManager {
 	int enemySpawnTime = 1000;
 	int score = 0;
 
+	int getScore() {
+		return this.score;
+	}
+
 	public ObjectManager(RocketShip rs) {
 		this.rs = rs;
+
 	}
 
 	public void update() {
@@ -86,6 +91,7 @@ public class ObjectManager {
 			for (Projectile b : pro) {
 
 				if (a.collisionBox.intersects(b.collisionBox)) {
+					score++;
 					a.isAlive = false;
 				}
 

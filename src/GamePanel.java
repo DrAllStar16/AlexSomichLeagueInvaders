@@ -56,9 +56,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		OM.manageEnemies();
 		OM.checkCollision();
 		OM.purgeObjects();
-		if (RS.isAlive = false) {
-			currentState = END_STATE;
-		}
+
 	}
 
 	public void updateEndState() {
@@ -87,7 +85,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		c.setFont(GameOverFont);
 		c.setColor(Color.WHITE);
 		c.drawString("Game Over", 140, 40);
-		c.drawString("You killed 0 enemies", 50, 400);
+		c.drawString("You killed " + OM.score + " enemies", 50, 400);
 		c.drawString("Press ENTER to restart", 40, 700);
 	}
 
@@ -124,6 +122,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (KeyEvent.VK_ENTER == e.getKeyCode()) {
 			currentState++;
 			RS.isAlive = true;
+			if (currentState == END_STATE) {
+				OM.score = 0;
+			}
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}

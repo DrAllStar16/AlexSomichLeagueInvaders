@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Projectile extends GameObject {
@@ -18,8 +17,6 @@ public class Projectile extends GameObject {
 	}
 
 	public void draw(Graphics f) {
-		f.setColor(Color.RED);
-
-		f.fillRect(x, y, w, h);
+		f.drawImage(GamePanel.bulletImg, x, y, w, h, null);
 	}
 }

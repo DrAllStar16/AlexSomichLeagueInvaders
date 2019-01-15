@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -19,6 +22,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font GameOverFont;
 	RocketShip RS;
 	ObjectManager OM;
+	public static BufferedImage alienImg;
+
+	public static BufferedImage rocketImg;
+
+	public static BufferedImage bulletImg;
+
+	public static BufferedImage spaceImg;
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
@@ -26,6 +36,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		GameOverFont = new Font("Futura", Font.BOLD, 36);
 		RS = new RocketShip(250, 700, 50, 50);
 		OM = new ObjectManager(RS);
+		try {
+
+			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+
+			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+
+			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+
+			spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+
+		} catch (IOException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}
 	}
 
 	@Override
@@ -74,8 +101,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void drawGameState(Graphics b) {
-		b.setColor(Color.black);
-		b.fillRect(0, 0, LeagueInvaders.w, LeagueInvaders.h);
+		b.drawImage(GamePanel.spaceImg, 0, 0, LeagueInvaders.w, LeagueInvaders.h, null);
 		OM.draw(b);
 	}
 
@@ -120,11 +146,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (KeyEvent.VK_ENTER == e.getKeyCode()) {
-			currentState++;
 			RS.isAlive = true;
 			if (currentState == END_STATE) {
 				OM.score = 0;
 			}
+			currentState++;
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}

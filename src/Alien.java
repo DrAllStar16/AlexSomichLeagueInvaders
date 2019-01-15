@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Alien extends GameObject {
@@ -14,9 +13,7 @@ public class Alien extends GameObject {
 	}
 
 	public void draw(Graphics f) {
-		f.setColor(Color.YELLOW);
-
-		f.fillRect(x, y, w, h);
+		f.drawImage(GamePanel.alienImg, x, y, w, h, null);
 	}
 
 }

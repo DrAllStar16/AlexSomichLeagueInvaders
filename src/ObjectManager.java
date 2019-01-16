@@ -7,7 +7,7 @@ public class ObjectManager {
 	ArrayList<Projectile> pro = new ArrayList<Projectile>();
 	ArrayList<Alien> ali = new ArrayList<Alien>();
 	long enemyTimer = 0;
-	int enemySpawnTime = 1000;
+	int enemySpawnTime = 500;
 	int score = 0;
 
 	int getScore() {
